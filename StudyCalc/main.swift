@@ -10,6 +10,7 @@ print("Введите первое целое число")
 let firstNumber = readLine() ?? ""
 print("Введите второе целое число")
 let secondNumber = readLine() ?? ""
+print("Идет вычисление примера")
 let result: Int
 let firstNumberInt = Int(firstNumber)
 let secondNumberInt = Int(secondNumber)
