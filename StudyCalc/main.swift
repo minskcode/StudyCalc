@@ -40,12 +40,9 @@ else {
 
 print("Добро пожаловать в программу калькулятор")
 
-print("Выберите операцию: +, -, *, /")
-let operation = readLine() ?? ""
-print("Введите первое целое число:")
-let firstNumber = readLine() ?? ""
-print("Введите второе целое число:")
-let secondNumber = readLine() ?? ""
+let operation = getDataFromUser(description: "Выберите операцию: +, -, *, /")
+let firstNumber = getDataFromUser(description: "Введите первое целое число:")
+let secondNumber = getDataFromUser(description: "Введите второе целое число:")
 
 print("Идет вычисление примера: " + firstNumber + " " + operation + " " + secondNumber)
 if let firstNumber = Int(firstNumber) {
@@ -67,4 +64,9 @@ if let firstNumber = Int(firstNumber) {
     }
 } else {
     print("Вы ввели некорректное первое число")
+}
+
+func getDataFromUser(description: String) -> String {
+    print(description)
+    return readLine() ?? ""
 }
