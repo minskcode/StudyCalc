@@ -47,18 +47,7 @@ let secondNumber = getDataFromUser(description: "Введите второе ц�
 print("Идет вычисление примера: " + firstNumber + " " + operation + " " + secondNumber)
 if let firstNumber = Int(firstNumber) {
     if let secondNumber = Int(secondNumber) {
-        switch operation {
-        case "+": print("Результат: " + String(firstNumber + secondNumber))
-        case "-": print("Результат: " + String(firstNumber - secondNumber))
-        case "*": print("Результат: " + String(firstNumber * secondNumber))
-        case "/":
-            if secondNumber != 0 {
-                print("Результат: " + String(firstNumber / secondNumber))
-            } else {
-                print("Делить на 0 нельзя")
-            }
-        default: print("Вы некорректно ввели операцию")
-        }
+       calculate(operation: operation, firstNumber: firstNumber, secondNumber: secondNumber)
     } else {
         print("Вы ввели некорректное второе число")
     }
@@ -69,4 +58,25 @@ if let firstNumber = Int(firstNumber) {
 func getDataFromUser(description: String) -> String {
     print(description)
     return readLine() ?? ""
+}
+
+func showResult(_ result: Int) {
+    let result = String(result)
+    let description = "Результат:"
+    print(description + " " + result)
+}
+
+func calculate(operation: String, firstNumber: Int, secondNumber: Int) {
+    switch operation {
+    case "+": showResult(firstNumber + secondNumber)
+    case "-": showResult(firstNumber - secondNumber)
+    case "*": showResult(firstNumber * secondNumber)
+    case "/":
+        if secondNumber != 0 {
+            showResult(firstNumber / secondNumber)
+        } else {
+            print("Делить на 0 нельзя")
+        }
+    default: print("Вы некорректно ввели операцию")
+    }
 }
