@@ -38,7 +38,10 @@ else {
 }
 */
 
-print("Добро пожаловать в программу калькулятор")
+
+
+
+/*print("Добро пожаловать в программу калькулятор")
 
 let operation = getDataFromUser(description: "Выберите операцию: +, -, *, /")
 let firstNumber = getDataFromUser(description: "Введите первое целое число:")
@@ -80,3 +83,8 @@ func calculate(operation: String, firstNumber: Int, secondNumber: Int) {
     default: print("Вы некорректно ввели операцию")
     }
 }
+*/
+
+let array: Array<Int> = [52, 25, 52, 43, Int!("sds")]
+print(array)
+
