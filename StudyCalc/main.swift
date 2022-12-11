@@ -78,13 +78,10 @@ func calculate(operation: String, firstNumber: Int, secondNumber: Int) {
         if secondNumber != 0 {
             showResult(firstNumber / secondNumber)
         } else {
-            print("Делить на 0 нельзя")
+            print("Делить на ноль нельзя")
         }
     default: print("Вы некорректно ввели операцию")
     }
 }
 */
-
-let array: Array<Int> = [52, 25, 52, 43, Int!("sds")]
-print(array)
 
