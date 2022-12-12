@@ -85,3 +85,6 @@ func calculate(operation: String, firstNumber: Int, secondNumber: Int) {
 }
 */
 
+for el in stride(from: 0, to: 10, by: 4) {
+    print("Privet" + "->" + String(el))
+}
