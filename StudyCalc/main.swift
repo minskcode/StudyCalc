@@ -1,39 +1,22 @@
 // Created by Nik Degilevich on 11.2022.
-// Refactored on 14.12.2022
+// Last refactored on 14.12.2022
 
 import Darwin
 
 print("Добро пожаловать в программу калькулятор")
 
 var history: [String] = []
-
 while true {
-    let operation = getDataFromUser(description: "Выберите операцию: +, -, *, /. Для завершения работы введите q. Введите h для просмотра истории вычислений")
-    if operation == "q" {
+    let action = getDataFromUser(description: "Что Вы хотите сделать? с - расчет примера, q - для завершения работы, h - для просмотра истории вычислений")
+    switch action {
+    case "c":
+        calculate()
+    case "q":
         exit(0)
-    } else if operation == "h" {
-        for example in history {
-            print(example)
-        }
-        continue
-    }
-    let firstNumber = getDataFromUser(description: "Введите первое целое число:")
-    let secondNumber = getDataFromUser(description: "Введите второе целое число:")
-    
-    let example = firstNumber + " " + operation + " " + secondNumber
-    print("Идет вычисление примера: " + example)
-    if let firstNumber = Int(firstNumber) {
-        if let secondNumber = Int(secondNumber) {
-            let result = calculate(operation: operation, firstNumber: firstNumber, secondNumber: secondNumber)
-            if let result = result {
-                showResult(result)
-                history.append(example + " = " + String(result))
-            }
-        } else {
-            print("Вы ввели некорректное второе число")
-        }
-    } else {
-        print("Вы ввели некорректное первое число")
+    case "h":
+        showHistory()
+    default:
+        print("Недопустимое действие")
     }
     print("")
     print("------------------------------------")
@@ -51,20 +34,55 @@ func showResult(_ result: Int) {
     print(description + " " + result)
 }
 
-func calculate(operation: String, firstNumber: Int, secondNumber: Int) -> Int? {
+func calculate2(operation: String, firstNumber: Int, secondNumber: Int) -> Int? {
     switch operation {
-    case "+": return firstNumber + secondNumber
-    case "-": return firstNumber - secondNumber
-    case "*": return firstNumber * secondNumber
+    case "+":
+        return firstNumber + secondNumber
+    case "-":
+        return firstNumber - secondNumber
+    case "*":
+        return firstNumber * secondNumber
+    case "/" where secondNumber == 0:
+        print("Деление на 0 недопустимо")
+        return nil
     case "/":
-        if secondNumber != 0 {
-            return firstNumber / secondNumber
-        } else {
-            print("Делить на ноль нельзя")
-            return nil
-        }
+        return firstNumber / secondNumber
     default:
         print("Вы некорректно ввели операцию")
         return nil
     }
 }
+
+func showHistory() {
+    for example in history {
+        print(example)
+    }
+}
+
+func calculate() {
+    let operation = getDataFromUser(description: "Выберите операцию: +, -, *, /")
+    guard operation == "+" || operation == "-" || operation == "*" || operation == "/" else {
+        print("Вы некорректно ввели операцию")
+        return
+    }
+    let firstNumber = getDataFromUser(description: "Введите первое целое число:")
+    guard let firstNumber = Int(firstNumber) else {
+        print("Вы некорректно ввели первое число")
+        return
+    }
+    let secondNumber = getDataFromUser(description: "Введите второе целое число:")
+    guard let secondNumber = Int(secondNumber) else {
+        print("Вы некорректно ввели второе число")
+        return
+    }
+    
+    let example = String(firstNumber) + " " + operation + " " + String(secondNumber)
+    print("Идет вычисление примера: " + example)
+    
+    let result = calculate2(operation: operation, firstNumber: firstNumber, secondNumber: secondNumber)
+    guard let result = result else { return }
+    
+    showResult(result)
+    history.append(example + " = " + String(result))
+}
+
