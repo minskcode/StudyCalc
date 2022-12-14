@@ -1,61 +1,43 @@
-//  main.swift
-//  StudyCalc
-// created by Nik Degilevich on 04.12.2022
+// Created by Nik Degilevich on 11.2022.
+// Refactored on 14.12.2022
 
-/*
+import Darwin
+
 print("Добро пожаловать в программу калькулятор")
-print("Выберите операцию: +, -, * или /")
-let operation = readLine() ?? ""
-print("Введите первое целое число")
-let firstNumber = readLine() ?? ""
-print("Введите второе целое число")
-let secondNumber = readLine() ?? ""
-print("Идет вычисление примера: \(firstNumber) \(operation) \(secondNumber)")
-let result: Int
-let firstNumberInt = Int(firstNumber)
-let secondNumberInt = Int(secondNumber)
-if operation == "+" {
-    result = firstNumberInt! + secondNumberInt!
-    print("Результат: \(result)")
-}
-else if operation == "-" {
-    result = firstNumberInt! - secondNumberInt!
-    print("Результат: \(result)")
-    
-}
-else if operation == "*" {
-    result = firstNumberInt! * secondNumberInt!
-    print("Результат: \(result)")
-    
-}
-else if operation == "/" {
-    result = firstNumberInt! / secondNumberInt!
-    print("Результат: \(result)")
-    
-}
-else {
-    print("Error")
-}
-*/
 
+var history: [String] = []
 
-
-
-/*print("Добро пожаловать в программу калькулятор")
-
-let operation = getDataFromUser(description: "Выберите операцию: +, -, *, /")
-let firstNumber = getDataFromUser(description: "Введите первое целое число:")
-let secondNumber = getDataFromUser(description: "Введите второе целое число:")
-
-print("Идет вычисление примера: " + firstNumber + " " + operation + " " + secondNumber)
-if let firstNumber = Int(firstNumber) {
-    if let secondNumber = Int(secondNumber) {
-       calculate(operation: operation, firstNumber: firstNumber, secondNumber: secondNumber)
-    } else {
-        print("Вы ввели некорректное второе число")
+while true {
+    let operation = getDataFromUser(description: "Выберите операцию: +, -, *, /. Для завершения работы введите q. Введите h для просмотра истории вычислений")
+    if operation == "q" {
+        exit(0)
+    } else if operation == "h" {
+        for example in history {
+            print(example)
+        }
+        continue
     }
-} else {
-    print("Вы ввели некорректное первое число")
+    let firstNumber = getDataFromUser(description: "Введите первое целое число:")
+    let secondNumber = getDataFromUser(description: "Введите второе целое число:")
+    
+    let example = firstNumber + " " + operation + " " + secondNumber
+    print("Идет вычисление примера: " + example)
+    if let firstNumber = Int(firstNumber) {
+        if let secondNumber = Int(secondNumber) {
+            let result = calculate(operation: operation, firstNumber: firstNumber, secondNumber: secondNumber)
+            if let result = result {
+                showResult(result)
+                history.append(example + " = " + String(result))
+            }
+        } else {
+            print("Вы ввели некорректное второе число")
+        }
+    } else {
+        print("Вы ввели некорректное первое число")
+    }
+    print("")
+    print("------------------------------------")
+    print("")
 }
 
 func getDataFromUser(description: String) -> String {
@@ -69,24 +51,20 @@ func showResult(_ result: Int) {
     print(description + " " + result)
 }
 
-func calculate(operation: String, firstNumber: Int, secondNumber: Int) {
+func calculate(operation: String, firstNumber: Int, secondNumber: Int) -> Int? {
     switch operation {
-    case "+": showResult(firstNumber + secondNumber)
-    case "-": showResult(firstNumber - secondNumber)
-    case "*": showResult(firstNumber * secondNumber)
+    case "+": return firstNumber + secondNumber
+    case "-": return firstNumber - secondNumber
+    case "*": return firstNumber * secondNumber
     case "/":
         if secondNumber != 0 {
-            showResult(firstNumber / secondNumber)
+            return firstNumber / secondNumber
         } else {
             print("Делить на ноль нельзя")
+            return nil
         }
-    default: print("Вы некорректно ввели операцию")
+    default:
+        print("Вы некорректно ввели операцию")
+        return nil
     }
-}
-*/
-
-var x = 0
-while x != 10 {
-    x += 1
-    print(x)
 }
