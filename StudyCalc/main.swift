@@ -1,11 +1,12 @@
 // Created by Nik Degilevich on 11.2022.
 // Last refactored on 14.12.2022
-
+/*
 import Darwin
 
 print("Добро пожаловать в программу калькулятор")
 
 var history: [String] = []
+
 while true {
     let action = getDataFromUser(description: "Что Вы хотите сделать? с - расчет примера, q - для завершения работы, h - для просмотра истории вычислений")
     switch action {
@@ -85,4 +86,6 @@ func calculate() {
     showResult(result)
     history.append(example + " = " + String(result))
 }
+*/
+
 
