@@ -88,4 +88,6 @@ func calculate() {
 }
 */
 
-
+class Car() {
+    
+}
