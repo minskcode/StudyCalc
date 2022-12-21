@@ -89,5 +89,4 @@ func calculate() {
 */
 
 class Car() {
-    
 }
