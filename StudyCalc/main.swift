@@ -87,7 +87,3 @@ func calculate() {
     history.append(example + " = " + String(result))
 }
 */
-
-class Car() {
-}
-func
