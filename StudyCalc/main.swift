@@ -87,3 +87,5 @@ func calculate() {
     history.append(example + " = " + String(result))
 }
 */
+
+func
